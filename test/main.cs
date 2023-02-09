@@ -1,17 +1,20 @@
 using System;
-class Program
-  {
-    static void Main(string[] args)
-    {
-      // dna strand
-      string startStrand = "ATGCGATGAGCTTAC";
-
-      // find location of "tga"
-            int tga = startStrand.IndexOf("TGA");
-      int startPoint = 0;
-      int ength = tga + 3;
-
-     string dna = startStrand.Substring(tga, tga+3);
-      Console.WriteLine(dna);
-    }
+public static class main{
+   public static  double multiply(double a, double b)
+{
+double r = a*b;   /* do some useful stuff */
+return r;         /* return a value of declared type */
 }
+
+}
+
+class Klasse{
+    static void Main(){
+    double start = 2.0;
+    double end = 2.0;
+    double x = main.multiply(start, end);
+    Console.Write(x);
+}
+}
+
+
