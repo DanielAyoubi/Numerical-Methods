@@ -24,6 +24,7 @@ public static class main{
 		foreach(double ai in a) Write($" ai = {ai} ");
 		WriteLine();
 		*/
+
 		vec u = new vec(1,2,3);
 		vec v = new vec(2,3,4);
 		u.print    ("u  =");
