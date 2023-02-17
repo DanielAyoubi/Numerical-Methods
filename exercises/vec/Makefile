@@ -7,5 +7,5 @@ main.exe : main.cs vec.dll
 vec.dll : vec.cs
 	mcs $< -target:library -out:$@
 
-print : Out.txt
-	cat Out.txt
+clean : 
+	rm -f Out.txt vec.dll main.exe
