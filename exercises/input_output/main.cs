@@ -3,32 +3,7 @@ using static System.Console;
 using static System.Math;
 class program{
     public static void Main(string[] args){
-        /* foreach(var arg in args){ */
-        /*     var words = arg.Split(":"); */
-        /*     if(words[0] == "-numbers"){ */
-        /*         var numbers = words[1].Split(","); */
-        /*         foreach(var number in numbers){ */
-        /*             double x = double.Parse(number); */
-        /*             int i = 1; */
-        /*             WriteLine($"x{i}={x}    sin(x{i})={Math.Sin(x)}     cos(x{i})={Math.Cos(x)}"); */
-        /*             i++; */
-        /*         } */
-        /*     } */
 
-        /* } */
-
-        /* char[] split_delimeters = {' ', '\t', '\n'}; */
-        /* var split_options = StringSplitOptions.RemoveEmptyEntries; */
-        /* for(string line=ReadLine(); line != null; line=ReadLine() ){ */
-        /*     var numbers = line.Split(split_delimeters, split_options); */
-        /*     foreach(var number in numbers){ */
-        /*         double x = double.Parse(number); */
-        /*         int i = 1; */
-        /*         WriteLine($"x{i}={x}    sin(x{i})={Math.Sin(x)}     cos(x{i})={Math.Cos(x)}"); */
-        /*         i++; */
-
-        /*     } */
-        /* } */
 
         string infile=null,outfile=null;
         foreach(var arg in args){

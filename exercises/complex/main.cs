@@ -30,5 +30,7 @@ class Program{
 		WriteLine($"√-1 = {i} \n√i = {sqrt_i} \ne^i = {e_i}  \ne^iπ = {e_i_pi} \ni^i = {i_i} \nln(i) = {ln_i} \nsin(iπ) = {sin_i}");
 	
 		WriteLine(complex.approx(Math.Sqrt(-1), i));
+        WriteLine(complex.approx(Math.Log(1), i));
+        WriteLine(complex.approx(ln_i.Real, i));
     }
 }
