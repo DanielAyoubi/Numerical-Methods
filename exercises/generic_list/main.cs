@@ -42,6 +42,7 @@ class generic_list{
 	list1.add(2);
 	list1.add(3);
 	list1.add(400);
+
 	int k = 0;
 	list1.remove(k); // remove item at index n
 	WriteLine(list1.size);
