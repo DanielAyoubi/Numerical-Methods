@@ -31,6 +31,5 @@ class Program{
 	
 		WriteLine(complex.approx(Math.Sqrt(-1), i));
         WriteLine(complex.approx(Math.Log(1), i));
-        WriteLine(complex.approx(ln_i.Real, i));
     }
 }
