@@ -1,23 +1,14 @@
-SDKDIR=$(HOME)/.dotnet/sdk/6.0.102# or whatever your sdk is
-CSCPATH=$(SDKDIR)/Roslyn/bincore/csc.dll
-NETSTANDARD=$(SDKDIR)/ref/netstandard.dll
-CONFIG=$(SDKDIR)/vstest.console.runtimeconfig.json
-DOTNET=DOTNET_CLI_TELEMETRY_OPTOUT=1; dotnet
-CSC=$(DOTNET) $(CSCPATH) -reference:$(NETSTANDARD)
-RUN=$(DOTNET) exec --runtimeconfig $(CONFIG)
-CSC = mcs
-RUN = mono
+Out.txt: main.exe
+	mono main.exe > Out.txt
 
-all: out.txt; cat $<
+main.exe: main.cs matrix.dll QRGS.dll 
+	mcs main.cs $(addprefix -reference:,$(filter %.dll,$^))
 
-out.txt: main.exe
-	$(RUN) $< > $@
-
-main.exe: main.cs matrix.dll
-	$(CSC) -reference:$(word 2,$^) $<
+QRGS.dll: QRGS.cs matrix.dll
+	mcs QRGS.cs $(addprefix -reference:,$(filter %.dll,$^)) -target:library -out:QRGS.dll
 
 matrix.dll : vector.cs matrix.cs
-	$(CSC) -target:library -out:$@ $^
+	mcs $^ -target:library -out:matrix.dll
 
 clean:
-	$(RM) *.dll *.exe [Oo]ut*
+	$(RM) *.dll *.exe Out*
