@@ -1,11 +1,15 @@
 using System;
 using static System.Console;
+using System.IO;
 using static System.Math;
 
 public class main{ 
 	public static void Main(){
-        jacobi_decomposition();
-        /* hydrogen_atom(); */
+        //jacobi_decomposition();
+        investigateconvergence();
+        eigenfuntions();
+
+        
 
 
 
@@ -50,10 +54,39 @@ public class main{
     }
 
     // Task B
-    public static void hydrogen_atom(){
-        
+    public static void investigateconvergence(){
+    double rmax_fixed = 10;
+    double[] dr_values = {0.1, 0.2, 0.3, 0.4, 0.5 , 0.6, 0.7, 0.8, 0.9, 1.0};
+    var outfile = new StreamWriter("different_dr.data");
+
+    foreach (double dr in dr_values){
+        matrix H = hydrogen_atom.diagonlize(rmax_fixed, dr);
+        double epsilon0 = hydrogen_atom.lowesteigenvalue(H);
+        outfile.WriteLine($"{dr} {epsilon0}");
+    }
+    outfile.Close();
+
+    double dr_fixed = 0.3;
+    double[] rmax_values = {1,2,3,4,5,6,7,8,9,10};
+    var outfile1 = new StreamWriter("different_rmax.data");
+
+    foreach (double rmax in rmax_values) {
+        matrix H = hydrogen_atom.diagonlize(rmax, dr_fixed);
+        double epsilon0 = hydrogen_atom.lowesteigenvalue(H);
+        outfile1.WriteLine($"{rmax} {epsilon0}");
+    }
+    outfile1.Close();
+    }
+
+    public static void eigenfuntions(){
+        matrix H = hydrogen_atom.diagonlize(25, 0.1);
+        matrix V = matrix.id(H.size1);
+        matrix H_copy = H.copy();
+        jacobi.cyclic(H_copy, V);
+        hydrogen_atom.numerical_eigenfunctions(H, V, 25, 0.1, 3);
+        hydrogen_atom.analytical_eigenfunctions(3, 25, 0.1);
 
 
     }
-
 }
+

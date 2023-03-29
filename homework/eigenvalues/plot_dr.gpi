@@ -1,0 +1,17 @@
+set terminal svg background "white"
+set output "dr_convergence.svg"
+set xlabel "Δr"
+set ylabel "ε0"
+
+set style line 11 lc rgb '#808080' lt 1
+set border 3 back ls 11
+set tics nomirror
+set style line 12 lc rgb '#808080' lt 0 lw 1
+set grid back ls 12
+
+set key bottom right
+set key font ",14"
+
+plot [0.1:1][-0.5:-0.4]\
+	"different_dr.data" using ($1):($2) with linespoints pt 7 ps 0.3 lc rgb "blue" \
+	title "Fixed rmax, varying dr"
