@@ -1,8 +1,8 @@
-DIR=../matlib
+Print: Out.txt
+	@cat Out.txt
 
 Out.txt: main.exe
-	mono $< > $@
-	@cat Out.txt
+	mono main.exe > Out.txt
 
 main.exe: main.cs matrix.dll QRGS.dll 
 	mcs main.cs $(addprefix -reference:,$(filter %.dll,$^))
@@ -10,8 +10,8 @@ main.exe: main.cs matrix.dll QRGS.dll
 QRGS.dll: QRGS.cs matrix.dll
 	mcs QRGS.cs $(addprefix -reference:,$(filter %.dll,$^)) -target:library -out:QRGS.dll
 
-matrix.dll : $(DIR)/vector.cs $(DIR)/matrix.cs
+matrix.dll : vector.cs matrix.cs
 	mcs $^ -target:library -out:matrix.dll
 
 clean:
-	rm *.dll *.exe Out*
+	$(RM) *.dll *.exe Out*

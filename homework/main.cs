@@ -1,92 +1,58 @@
-public static class QRGS
-{
-    public static void decomp(matrix a, matrix r)
-    {
-        int n = a.size1;
-        int m = a.size2;
+using System;
+using static System.Console;
+using static System.Math;
 
-        for (int j = 0; j < m; j++)
-        {
-            double norm = 0;
+public class main{ 
+	public static void Main(){
+		
+		WriteLine("Part A:");
+		
 
-            for (int i = 0; i < n; i++)
-            {
-                norm += a[i, j] * a[i, j];
-            }
-
-            norm = Math.Sqrt(norm);
-            r[j, j] = norm;
-
-            for (int i = 0; i < n; i++)
-            {
-                a[i, j] /= norm;
-            }
-
-            for (int k = j + 1; k < m; k++)
-            {
-                double dot = 0;
-
-                for (int i = 0; i < n; i++)
-                {
-                    dot += a[i, j] * a[i, k];
-                }
-
-                r[j, k] = dot;
-
-                for (int i = 0; i < n; i++)
-                {
-                    a[i, k] -= r[j, k] * a[i, j];
-                }
-            }
-        }
-    }
-
-    public static vector solve(matrix Q, matrix R, vector b)
-    {
-        int n = Q.size1;
-        int m = Q.size2;
-
-        // Calculate Q^T * b
-        vector y = new vector(m);
-        for (int j = 0; j < m; j++)
-        {
-            double dot = 0;
-
-            for (int i = 0; i < n; i++)
-            {
-                dot += Q[i, j] * b[i];
-            }
-
-            y[j] = dot;
-        }
-
-        // Solve Rx = y using back-substitution
-        vector x = new vector(m);
-        for (int j = m - 1; j >= 0; j--)
-        {
-            double dot = 0;
-
-            for (int k = j + 1; k < m; k++)
-            {
-                dot += R[j, k] * x[k];
-            }
-
-            x[j] = (y[j] - dot) / R[j, j];
-        }
-
-        return x;
-    }
-
-    public static double det(matrix R)
-    {
-        double det = 1;
-
-        for (int i = 0; i < R.size1; i++)
-        {
-            det *= R[i, i];
-        }
-
-        return det;
-    }
-}
-
+		WriteLine("Generate a random matrix A (8x3)");
+		var A1 = matrix.random_matrix(8,3);
+		A1.print("A=");
+		WriteLine("");
+		WriteLine("Factorize it into QR by decomposing with call to QRGS.dec(A)");
+		var (Q1, R1) = QRGS.dec(A1);
+        	Q1.print("Q = ");
+        	R1.print("R = ");
+		WriteLine("");
+		WriteLine("Then Q^TQ=1 and QR=A is checked");
+		WriteLine("");
+		var test1 = Q1.T * Q1;
+		test1.print("Q^TQ= ");
+		WriteLine("");
+		var test2 = Q1*R1;
+		//test2.print("QR=");
+		WriteLine($"QR=A ?=> {test2.approx(A1)}");
+		WriteLine("");
+		WriteLine("#####################");
+		WriteLine("");
+		WriteLine("Generate a square matrix A (5x5)");
+		var A2 = matrix.random_matrix(5,5);
+		A2.print("A = ");
+		WriteLine("Generate a random vector b with 5 rows");
+		var b2 = matrix.random_vector(5);
+		b2.print("b = ");
+		WriteLine("");
+		WriteLine("solve Ax=b with QRx=b");
+		var (Q2,R2) = QRGS.dec(A2);
+		var x = QRGS.solve(Q2,R2,b2);
+		x.print("x = ");
+		WriteLine("");
+		var test3 = A2*x;
+		WriteLine($"Ax=b ?=> {test3.approx(b2)}");  
+	
+		WriteLine("");
+		WriteLine("Part b:");
+		WriteLine("Using square matrix A from above and the factorized QR aswell");
+		WriteLine("Calculates inverse of A refered to as B");
+		var B = QRGS.inverse(Q2,R2);
+		var I = QRGS.inverse(Q2,R2);
+		B.print("B = ");
+		var test4 = A2*B;
+		I.set_identity();
+		WriteLine($"A*B = I ? => {test4.approx(I)}"); 
+				
+	}//Main	
+}//classmain
