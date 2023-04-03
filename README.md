@@ -1,6 +1,4 @@
 Repository for course in practical programming and numerical methods
-################# date 8.3 #################
-Made Readme file today so updates are only from the 8 of March.
 
 
 ======================================
@@ -8,7 +6,7 @@ Made Readme file today so updates are only from the 8 of March.
  ======================================
 | 1  | LinEq         | 6 | 3 | - |  9  |
 ---------------------------------------
-| 2  | EVD           | - | - | - |  -  |
+| 2  | EVD           | 6 | 3 | - |  -  |
 ---------------------------------------
 | 3  | LeastSquares  | - | - | - |  -  |
 ---------------------------------------

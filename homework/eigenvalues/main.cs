@@ -5,14 +5,12 @@ using static System.Math;
 
 public class main{ 
 	public static void Main(){
-        //jacobi_decomposition();
+        double rmax = 10;
+        double dr = 0.1;
+        jacobi_decomposition();
         investigateconvergence();
-        eigenfuntions();
-
+        eigenfunctions(rmax, dr, 3);
         
-
-
-
     }
 
     public static void jacobi_decomposition(){
@@ -78,14 +76,45 @@ public class main{
     outfile1.Close();
     }
 
-    public static void eigenfuntions(){
-        matrix H = hydrogen_atom.diagonlize(25, 0.1);
+    public static void eigenfunctions(double rmax, double dr, int nStates){
+        vector eigenfunction;
+        int npoints = (int)(rmax/dr)-1;
+        vector r = new vector(npoints);
+        for(int i=0;i<npoints;i++)r[i]=dr*(i+1);
+        matrix H = new matrix(npoints,npoints);
+        for(int i=0;i<npoints-1;i++){
+        H[i,i]  =-2;
+        H[i,i+1]= 1;
+        H[i+1,i]= 1;
+        }
+        H[npoints-1,npoints-1]=-2;
+        H *=-0.5/dr/dr;
+        for(int i=0;i<npoints;i++)H[i,i]+=-1/r[i];
         matrix V = matrix.id(H.size1);
-        matrix H_copy = H.copy();
-        jacobi.cyclic(H_copy, V);
-        hydrogen_atom.numerical_eigenfunctions(H, V, 25, 0.1, 3);
-        hydrogen_atom.analytical_eigenfunctions(3, 25, 0.1);
+        jacobi.cyclic(H,V);
 
+        double min = H[0,0];
+        int index = 0;
+        for(int i = 0; i < H.size1; i++){
+            if(H[i,i] < min){ 
+                min = H[i,i];
+                index = i;
+            }
+        }
+        eigenfunction = V[index];
+
+        vector analytical_solution = new vector(npoints);
+        double a_0 = 1.0; // Bohr radius
+
+        for (int i = 0; i < npoints; i++) {
+            analytical_solution[i] = 1 / (Sqrt(PI) * Pow(a_0, 1.5)) * Math.Exp(-r[i] / a_0);
+        }
+
+        var outfile2 = new StreamWriter("eigenfunctions.data");
+        for(int i = 0; i < r.size; i++){
+            outfile2.WriteLine($"{r[i]} {eigenfunction[i]} {eigenfunction[i]/r[i]} {analytical_solution[i]} ");
+        }
+        outfile2.Close();
 
     }
 }

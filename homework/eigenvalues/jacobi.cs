@@ -44,6 +44,5 @@ public static class jacobi{
 			 			}
 			 	}
 		}while(changed);
-
 	}
 }

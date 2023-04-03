@@ -1,11 +1,11 @@
 DIR=../matlib
 
-all : plot_dr.svg plot_rmax.svg plot_eigenfunctions.svg
+all: plot_eigenfunctions.svg plot_dr.svg plot_rmax.svg
 
-plot_eigenfunctions.svg : plot_eigenfunctions.gpi eigenfunctions.data
+plot_eigenfunctions.svg : plot_eigenfunctions.gpi eigenfunctions.data 
 	gnuplot $<
 
-plot_dr.svg : plot_dr.gpi different_deltar.data
+plot_dr.svg : plot_dr.gpi different_dr.data
 	gnuplot $<
 
 plot_rmax.svg : plot_rmax.gpi different_rmax.data
@@ -14,8 +14,10 @@ plot_rmax.svg : plot_rmax.gpi different_rmax.data
 Out.txt: main.exe
 	mono main.exe > Out.txt
 
-different_deltar.data different_rmax.data eigenfunctions.data: main.exe
+different_dr.data different_rmax.data : main.exe
 	mono main.exe
+
+eigenfunctions.data : different_dr.data different_rmax.data
 
 main.exe: main.cs matrix.dll 
 	mcs main.cs $(addprefix -reference:,$(filter %.dll,$^))

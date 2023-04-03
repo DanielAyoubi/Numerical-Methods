@@ -9,21 +9,14 @@ set key font ",14"
 
 
 set terminal svg background "white"
-set output 'eigenfunctions.svg'
-set xlabel 'r'
-set ylabel 'ψ(r)'
-set multiplot layout 1,2
-set xlabel 'r'
-set ylabel 'ψ^2(r)'
+set output "eigenfunctions.svg"
 
-set title 'Analytical Eigenfunctions'
-plot 'analytical_eigenfunctions.data' using 1:2 with lines title 'Eigenfunction 1', \
-     'analytical_eigenfunctions.data' using 1:3 with lines title 'Eigenfunction 2', \
-     'analytical_eigenfunctions.data' using 1:4 with lines title 'Eigenfunction 3'
+set xlabel "r"
+set ylabel "Wave function"
+set key outside
 
-set title 'Numerical Eigenfunctions'
-plot 'numerical_eigenfunctions.data' using 1:2 with lines title 'Eigenfunction 1', \
-     'numerical_eigenfunctions.data' using 1:3 with lines title 'Eigenfunction 2', \
-     'numerical_eigenfunctions.data' using 1:4 with lines title 'Eigenfunction 3'
+set title "Hydrogen Atom Eigenfunctions"
 
-unset multiplot
+
+plot 'eigenfunctions.data' using 1:3 with lines title 'Numerical Eigenfunction', \
+     'eigenfunctions.data' using 1:4 with lines title 'Analytical Solution'
