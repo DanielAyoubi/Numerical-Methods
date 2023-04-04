@@ -1,21 +1,20 @@
 DIR=../matlib
 
-all: plot_eigenfunctions.svg plot_dr.svg plot_rmax.svg
+all: Out.txt plot_eigenfunctions.svg plot_dr.svg plot_rmax.svg
+
+Out.txt: main.exe
+	mono main.exe > Out.txt
 
 plot_eigenfunctions.svg : plot_eigenfunctions.gpi eigenfunctions.data 
 	gnuplot $<
 
-plot_dr.svg : plot_dr.gpi different_dr.data
+plot_dr.svg : plot_dr.gpi different_dr.data | plot_dr.gpi
 	gnuplot $<
 
 plot_rmax.svg : plot_rmax.gpi different_rmax.data
 	gnuplot $<
 
-Out.txt: main.exe
-	mono main.exe > Out.txt
-
 different_dr.data different_rmax.data : main.exe
-	mono main.exe
 
 eigenfunctions.data : different_dr.data different_rmax.data
 

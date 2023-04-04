@@ -32,6 +32,7 @@ public static class QRGS{
     }
 
     public static double det(matrix A){
+        #pragma warning disable CS0219
         (matrix Q, matrix R) = QRGS.decomp(A);
         double detQ = 1; // orthogonal -> always 1
         double detR = 1;
@@ -43,13 +44,14 @@ public static class QRGS{
         return detQ * detR;
     }
 
-    // Task B. //
+
+
     public static matrix inverse(matrix A){
         (matrix Q, matrix R) = QRGS.decomp(A);
         matrix A_inverse = new matrix(R.size1, R.size2);
         for (int i = 0; i < R.size1; i++){
             vector e = new vector(R.size1); e[i] = 1;
-            A_inverse[i] = solve(A,e);
+            A_inverse[i] = solve(R.transpose(), Q * e);
         }
         return A_inverse;
 

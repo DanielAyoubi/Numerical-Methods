@@ -7,7 +7,6 @@ set grid back ls 12
 set key bottom right
 set key font ",14"
 
-
 set terminal svg background "white"
 set output "eigenfunctions.svg"
 

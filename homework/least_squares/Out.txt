@@ -1,0 +1,5 @@
+ln(a) = 4.9511553496486, λ = 0.169887082001008
+Half-life time, T½ = 4.08004641904341 ± 0.500700997774319 days
+Modern half-life time value for 224Ra: 3.63 days
+Difference: 0.45004641904341 days
+Agrees with modern value within the estimated uncertainty: True

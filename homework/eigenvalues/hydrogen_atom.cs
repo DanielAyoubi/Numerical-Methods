@@ -34,7 +34,6 @@ public class hydrogen_atom{
         } 
         return min;
     }
-
 }
 
 
