@@ -1,16 +1,22 @@
 DIR=../matlib
 
+all: Out.txt test.svg lotka_volterra.svg
+
 Out.txt: main.exe
 	mono main.exe > Out.txt
 
-main.exe: main.cs matrix.dll QRGS.dll 
-	mcs main.cs $(addprefix -reference:,$(filter %.dll,$^))
+test.svg : plot.gpi Out.txt
+	gnuplot $<
 
-QRGS.dll: QRGS.cs matrix.dll
-	mcs QRGS.cs $(addprefix -reference:,$(filter %.dll,$^)) -target:library -out:QRGS.dll
+lotka_volterra.svg : lotka_volterra.gpi lotka_volterra.data
+	gnuplot $<
 
-matrix.dll : $(DIR)/vector.cs $(DIR)/ matrix.cs
-	mcs $^ -target:library -out:matrix.dll
+main.exe: main.cs ODE.dll
+	mcs main.cs -reference:ODE.dll
+
+ODE.dll: $(DIR)/vector.cs $(DIR)/matrix.cs RK45.cs genlist.cs
+	mcs $^ -target:library -out:ODE.dll
 
 clean:
-	rm *.dll *.exe Out*
+	rm -f *.dll *.exe Out* *.svg *.txt *.data
+
