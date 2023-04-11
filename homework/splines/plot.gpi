@@ -1,0 +1,13 @@
+set terminal svg background "white"
+set output 'plot_linear_splines.svg'
+set title 'Linear Interpolation for Sin(x)'
+set xlabel 'x'
+set ylabel 'f(x)'
+
+set grid
+set key inside
+
+plot "data_points.data" index 0 using 1:2 smooth cspline title "Sin(x)", \
+     "data_points.data" index 1 using 1:2 with lines title "Linear Interpolation", \
+     "data_points.data" index 1 using 1:3 with lines title "Integrated Values", \
+     "data_points.data" index 2 using 1:2 with points pt 6 ps 1 lc rgb "red" title "Interpolation Points"

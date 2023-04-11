@@ -10,6 +10,8 @@ Repository for course in practical programming and numerical methods
 ---------------------------------------
 | 3  | LeastSquares  | 6 | 3 | 1 | 10  |
 ---------------------------------------
+| 4  | Splines       | 6 | 3 | - |  9  |
+---------------------------------------
 |              ...                     |
  ======================================
 |                    total points: -  |

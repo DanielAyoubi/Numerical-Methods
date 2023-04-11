@@ -1,0 +1,13 @@
+set terminal svg background "white"
+set output 'plot_qspline.svg'
+set title 'Quadratic Spline Interpolation for Sin(x) and its Derivative'
+set xlabel 'x'
+set ylabel 'f(x)'
+
+set grid
+set key inside
+
+plot "qspline.data" using 1:2 with lines title "Quadratic Spline", \
+     "qspline.data" using 1:3 with lines title "Derivative of Quadratic Spline", \
+     "data_points.data" index 0 using 1:2 smooth cspline title "Sin(x)", \
+     "data_points.data" index 2 using 1:2 with points pt 6 ps 1 lc rgb "red" title "Interpolation Points"

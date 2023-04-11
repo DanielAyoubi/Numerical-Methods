@@ -3,6 +3,7 @@ using static System.Console;
 using static System.Math;
 using System.IO;
 
+
 public class main{ 
 	public static (vector, matrix, vector) lsfit(Func<double, double>[] fs, vector x, vector y, vector dy){
 		int n = x.size; 
@@ -82,7 +83,7 @@ public static double fittedvalue(double x, vector c, vector dc, Func<double, dou
 
 		double fitted_value_add = fittedvalue(t[i], coefficients, uncertainties, fs, true);
         double fitted_value_sub = fittedvalue(t[i], coefficients, uncertainties, fs, false);
-        outfile_uncertainty.WriteLine($"{t[i]} {fitted_value + fitted_value_add} {fitted_value - 	fitted_value_sub}");
+        outfile_uncertainty.WriteLine($"{t[i]} {fitted_value + fitted_value_add} {fitted_value - fitted_value_sub}");
 	}
 	outfile.Close();
 	outfile_uncertainty.Close();
@@ -95,5 +96,4 @@ public static double fittedvalue(double x, vector c, vector dc, Func<double, dou
     Console.WriteLine($"Agrees with modern value within the estimated uncertainty: {withinUncertainty}");
 	
 	}
-
 }//classmain
