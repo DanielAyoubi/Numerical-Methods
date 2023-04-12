@@ -57,7 +57,6 @@ public class main {
 
 	}//Main	
     static void Lotka_Volterra() {
-    // Lotka-Volterra function
     Func<double, vector, vector> lotkavolterra = (t, z) => {
         double a = 1.5;
         double b = 1;
@@ -68,7 +67,6 @@ public class main {
         return new vector(a * x - b * x * y, -c * y + d * x * y);
     };
 
-    // Solve the ODE system
     double t0 = 0;
     vector y0 = new vector(10, 5);
     double tEnd = 15;
@@ -80,7 +78,6 @@ public class main {
     var zlist = new genlist<vector>();
     ODE.improved_driver(lotkavolterra, t0, y0, tEnd, acc, eps, h, tlist, zlist);
 
-    // Create dense output
     int n = 300;
     double[] t_dense = new double[n];
     vector[] z_dense = new vector[n];
@@ -101,7 +98,6 @@ public class main {
         z_dense[i] = zlist[idx] + dz * (dt / (tlist[idx + 1] - tlist[idx]));
     }
 
-    // Write the dense output to a file
     using (var file = new System.IO.StreamWriter("lotka_volterra.data")) {
         for (int i = 0; i < t_dense.Length; i++) {
             file.WriteLine($"{t_dense[i]}\t{z_dense[i][0]}\t{z_dense[i][1]}");
