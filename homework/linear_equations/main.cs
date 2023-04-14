@@ -1,7 +1,7 @@
 using System;
 using static System.Console;
 using static System.Math;
-
+using System.Diagnostics;
 
 class Program {
     public static matrix random_matrix(int n, int m){
@@ -15,14 +15,30 @@ class Program {
         return A;}
 
     
-    static void Main() {
+    static void Main(string[] args) {
+        int N = 0;
+        foreach (var arg in args) {
+            var word = arg.Split(":");
+            if (word[0] == "-size") {
+                N = int.Parse(word[1]);   
+            }
+        
+        matrix A = random_matrix(N, N);
+        Stopwatch sw = new Stopwatch();
+        sw.Start();
+        (matrix Q, matrix R) = QRGS.decomp(A);
+        sw.Stop();
+
+        using (var file = new System.IO.StreamWriter("out.times.data", true))
+        {
+            file.WriteLine($"{N} {sw.Elapsed.TotalSeconds}");
+        }
+        }
         Check_decomp_function();
         Check_solve_function();
         Check_inverse_function();
 
-    }
-
-    
+    }    
     
     public static void Check_decomp_function(){
         int n = 4;
@@ -81,7 +97,9 @@ class Program {
         int n = rnd.Next(2,5);
         matrix A = random_matrix(n, n);
         matrix B = QRGS.inverse(A);
+        Console.WriteLine("Matrix A");
         A.print();
+        Console.WriteLine("Matrix B");
         B.print();
     } // inverse_function
 }

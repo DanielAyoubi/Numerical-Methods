@@ -1,0 +1,12 @@
+set terminal svg background "white"
+
+set xlabel "Matrix Size N"
+set ylabel "Time[seconds]"
+
+
+
+set output "plot.svg"
+
+a = 1
+fit a*x**3 "out.times.data" using 1:2 via a
+plot "out.times.data" using 1:2 with points title "QR Factorization Time", a*x**3 title "N^3 Fit"

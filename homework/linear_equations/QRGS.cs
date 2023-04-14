@@ -32,7 +32,7 @@ public static class QRGS{
     }
 
     public static double det(matrix A){
-        (matrix Q, matrix R) = QRGS.decomp(A);
+        matrix R = QRGS.decomp(A).Item2;
         double detQ = 1; // orthogonal -> always 1
         double detR = 1;
         for (int i = 0; i < R.size2; i++){
@@ -45,7 +45,7 @@ public static class QRGS{
 
     // Task B. //
     public static matrix inverse(matrix A){
-        (matrix Q, matrix R) = QRGS.decomp(A);
+        matrix R = QRGS.decomp(A).Item2;
         matrix A_inverse = new matrix(R.size1, R.size2);
         for (int i = 0; i < R.size1; i++){
             vector e = new vector(R.size1); e[i] = 1;

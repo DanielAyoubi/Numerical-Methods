@@ -1,0 +1,21 @@
+The determinant of matrix matrix is 0.319989916053832
+Checking that R is upper triangular
+R is upper triangular matrix
+Checking that Q^TQ = 1
+Q^TQ is not equal to identity
+Checking if QR = A
+QR = A is true
+Solving QRx=b
+x=     -2.36       1.19 
+Checking if Ax=b
+Ax=b is true
+Matrix A
+
+     0.249      0.111      0.467 
+     0.772      0.658      0.433 
+     0.354      0.944      0.101 
+Matrix B
+
+     -2.21       2.78      -1.68 
+     0.486     -0.906       1.63 
+       3.2      -1.26      0.505 
