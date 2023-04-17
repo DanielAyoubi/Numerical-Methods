@@ -77,10 +77,9 @@ public class main{
     }
 
     public static void eigenfunctions(double rmax, double dr, int nStates){
-        vector eigenfunction;
         int npoints = (int)(rmax/dr)-1;
         vector r = new vector(npoints);
-        for(int i=0;i<npoints;i++)r[i]=dr*(i+1);
+        for(int i=0;i<npoints;i++) r[i]=dr*(i+1);
         matrix H = new matrix(npoints,npoints);
         for(int i=0;i<npoints-1;i++){
         H[i,i]  =-2;
@@ -89,33 +88,30 @@ public class main{
         }
         H[npoints-1,npoints-1]=-2;
         H *=-0.5/dr/dr;
-        for(int i=0;i<npoints;i++)H[i,i]+=-1/r[i];
+        for(int i=0;i<npoints;i++) H[i,i]+=-1/r[i];
         matrix V = matrix.id(H.size1);
         jacobi.cyclic(H,V);
 
-        double min = H[0,0];
-        int index = 0;
-        for(int i = 0; i < H.size1; i++){
-            if(H[i,i] < min){ 
-                min = H[i,i];
-                index = i;
-            }
-        }
-        eigenfunction = V[index];
-
         vector analytical_solution = new vector(npoints);
-        double a_0 = 1.0; // Bohr radius
+        vector analytical_solution1 = new vector(npoints);
+        double a_0 = 1.0;
 
-        for (int i = 0; i < npoints; i++) {
-            analytical_solution[i] = 1 / (Sqrt(PI) * Pow(a_0, 1.5)) * Math.Exp(-r[i] / a_0);
+        for (int i = 0; i < r.size; i++) {
+            analytical_solution[i] = 1 / (Sqrt(PI) * 1 / Pow(a_0, 1.5)) * Math.Exp(-r[i] / a_0);
+            analytical_solution1[i] = 1 / (4* (Sqrt(2*PI)) * 1 / Pow(a_0, 1.5)) * (2 - r[i]/a_0) * Math.Exp(-r[i] / a_0);
         }
+        
+        double Const = 1 / Sqrt(dr);
 
         var outfile2 = new StreamWriter("eigenfunctions.data");
-        for(int i = 0; i < r.size; i++){
-            outfile2.WriteLine($"{r[i]} {eigenfunction[i]} {eigenfunction[i]/r[i]} {analytical_solution[i]} ");
+        for (int i = 0; i < r.size; i++) {
+            double eigenfunction1 = Const * V[i,0] / r[i];
+            double eigenfunction2 = Const * V[i,1] / r[i];
+            double eigenfunction3 = Const * V[i,2] / r[i];
+            outfile2.WriteLine($"{r[i]} {Const * analytical_solution[i]} {Const * analytical_solution1[i]} {eigenfunction1} {eigenfunction2} {eigenfunction3} ");
         }
+
         outfile2.Close();
-
     }
-}
 
+}

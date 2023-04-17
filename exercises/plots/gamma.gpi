@@ -1,28 +1,15 @@
-# Set the output terminal to SVG format
 set terminal svg
-# Set the position of the key to be at the bottom right of the graph
 set key bottom right
-# Specify the name of the output file for the graph
 set output "Gamma.svg"
-# Set the label for the x-axis to be "x"
 set xlabel "x"
-# Set the label for the y-axis to be "y"
 set ylabel "y"
-# Set the position of the tics (marks on the axes) to be outside the graph
 set tics out
-# Draw a horizontal line at the x-axis (y=0)
 set xzeroaxis
-# Draw a vertical line at the y-axis (x=0)
 set yzeroaxis
-# Set the number of samples used for plotting curves to be 800
 set samples 800
-# Set the title of the graph to be "Gamma function"
 set title "Gamma function"
-# Specify the range of the x-axis and y-axis to be from -5 to 5, and indicate that multiple datasets will be plotted in the following lines
 plot [-5:5][-5:5] \
-# Plot the data in the "gamma.data" file as a continuous line with linetype 1 and title "theory"
 "gamma.data" with lines linetype 1 title "theory" \
-# Plot the data in the "factorials.data" file as points with pointtype 4 and title "experiment", and shift the x-coordinate by 1
 ,"factorials.data" using ($1+1):($2) with points pointtype 4 title "experiment" \
-# Commented out - this line would plot the built-in gamma function as a line with linetype 2 and title "built-in gamma"
-#,gamma(x) with lines linetype 2 title "built-in gamma"
+plot the built-in gamma function as a line with linetype 2 and title "built-in gamma"
+,gamma(x) with lines linetype 2 title "built-in gamma"

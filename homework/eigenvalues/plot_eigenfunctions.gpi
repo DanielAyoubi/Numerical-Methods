@@ -1,21 +1,21 @@
-set style line 11 lc rgb '#808080' lt 1
-set border 3 back ls 11
-set tics nomirror
-set style line 12 lc rgb '#808080' lt 0 lw 1
-set grid back ls 12
-
-set key bottom right
-set key font ",14"
-
-set terminal svg background "white"
+set terminal svg background "white" size 800,600
 set output "eigenfunctions.svg"
 
-set xlabel "r"
-set ylabel "Wave function"
+set title 'Eigenfunctions'
+set xlabel 'r'
+set ylabel 'Functions'
 set key outside
 
-set title "Hydrogen Atom Eigenfunctions"
 
+set style line 1 lc rgb 'red' lt 1 lw 2 pt 7 ps 0.5
+set style line 2 lc rgb 'blue' lt 1 lw 2 pt 7 ps 0.5
+set style line 3 lc rgb 'yellow' lt 1 lw 2 pt 7 ps 0.5
+set style line 4 lc rgb 'green' lt 1 lw 2 pt 7 ps 0.5
+set style line 5 lc rgb 'purple' lt 1 lw 2 pt 7 ps 0.5
 
-plot 'eigenfunctions.data' using 1:3 with lines title 'Numerical Eigenfunction', \
-     'eigenfunctions.data' using 1:4 with lines title 'Analytical Solution'
+set title 'Eigenfunctions'
+plot 'eigenfunctions.data'  using 1:2 with linespoints linestyle 1 title 'Analytical Solution 1', \
+     'eigenfunctions.data'  using 1:3 with linespoints linestyle 2 title 'Analytical Solution 2', \
+     'eigenfunctions.data'  using 1:4 with linespoints linestyle 3 title 'Eigenfunction 1', \
+     'eigenfunctions.data'  using 1:5 with linespoints linestyle 4 title 'Eigenfunction 2', \
+     'eigenfunctions.data'  using 1:6 with linespoints linestyle 5 title 'Eigenfunction 3'
