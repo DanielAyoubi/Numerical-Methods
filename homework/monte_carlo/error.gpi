@@ -1,0 +1,13 @@
+set terminal svg background "white"
+set output 'errors.svg'
+set logscale x
+set xlabel 'Number of sampling points (N)'
+set ylabel 'Error'
+set title 'Monte Carlo Integration Errors'
+set key left top
+set grid
+
+plot 'errors.data' using 1:2 with linespoints title 'Estimated Error using plain MC', \
+     'errors.data' using 1:3 with linespoints title 'Actual Error', \
+     'errors.data' using 1:4 with linespoints title 'Estimated Error using Quasi-random', \
+     1/sqrt(x) title '1/sqrt(N)' with lines
