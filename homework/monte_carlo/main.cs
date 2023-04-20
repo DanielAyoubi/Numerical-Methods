@@ -23,7 +23,7 @@ class main{
 
         using (var data = new System.IO.StreamWriter("errors.data"))
         {
-            for (int n = 10; n <= 10000000; n *= 10)
+            for (int n = 10; n <= 1000000; n *= 10)
             {
                 var (result, error) = plainmc(unit_circle, a, b, n);
                 var (result_QR, error_QR) = QuasiRandomMonteCarlo(unit_circle, a, b, n);

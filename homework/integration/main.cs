@@ -15,16 +15,16 @@ class main{
         double epsilon = 0.001;
 
         Console.WriteLine("∫01 dx √(x) = 2/3:");
-        Console.WriteLine($"Result: {integral1}, Accuracy goal met: {Abs(integral1 - 2.0 / 3.0) <= delta + epsilon * Abs(integral1)}");
+        Console.WriteLine($"Result: {integral1}, within accuracy: {Abs(integral1 - 2.0 / 3.0) <= delta + epsilon * Abs(integral1)}");
 
         Console.WriteLine("∫01 dx 1/√(x) = 2:");
-        Console.WriteLine($"Result: {integral2}, Accuracy goal met: {Abs(integral2 - 2.0) <= delta + epsilon * Abs(integral2)}");
+        Console.WriteLine($"Result: {integral2}, within accuracy: {Abs(integral2 - 2.0) <= delta + epsilon * Abs(integral2)}");
 
         Console.WriteLine("∫01 dx 4√(1-x²) = π:");
-        Console.WriteLine($"Result: {integral3}, Accuracy goal met: {Abs(integral3 - PI) <= delta + epsilon * Abs(integral3)}");
+        Console.WriteLine($"Result: {integral3}, within accuracy: {Abs(integral3 - PI) <= delta + epsilon * Abs(integral3)}");
 
         Console.WriteLine("∫01 dx ln(x)/√(x) = -4:");
-        Console.WriteLine($"Result: {integral4}, Accuracy goal met: {Abs(integral4 + 4.0) <= delta + epsilon * Abs(integral4)}");
+        Console.WriteLine($"Result: {integral4}, within accuracy: {Abs(integral4 + 4.0) <= delta + epsilon * Abs(integral4)}");
 
 		Console.WriteLine("Error function for z = 0.5:");
         Console.WriteLine(Erf(0.5));	

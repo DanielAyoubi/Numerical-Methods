@@ -1,11 +1,11 @@
 ∫01 dx √(x) = 2/3:
-Result: 0.666953909054655, Accuracy goal met: True
+Result: 0.666953909054655, within accuracy: True
 ∫01 dx 1/√(x) = 2:
-Result: 1.99996150007805, Accuracy goal met: True
+Result: 1.99996150007805, within accuracy: True
 ∫01 dx 4√(1-x²) = π:
-Result: 3.14183457802727, Accuracy goal met: True
+Result: 3.14183457802727, within accuracy: True
 ∫01 dx ln(x)/√(x) = -4:
-Result: -3.99991705899915, Accuracy goal met: True
+Result: -3.99991705899915, within accuracy: True
 Error function for z = 0.5:
 0.520450833623745
 ∫01 dx 1/√(x) using Clenshaw-Curtis transformation:
