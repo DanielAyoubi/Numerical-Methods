@@ -3,7 +3,6 @@ using static System.Console;
 using static System.Math;
 using static adaptiveintegrator;
 
-
 class main{
 	public static void Main()
     {
