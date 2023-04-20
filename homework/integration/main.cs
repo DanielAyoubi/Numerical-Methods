@@ -43,8 +43,28 @@ class main{
         Console.WriteLine("∫01 dx ln(x)/√(x) using Clenshaw-Curtis transformation:");
         Console.WriteLine(Integrate_CC(x => Log(x) / Sqrt(x), 0, 1));
 		}
+
+
+        (double result, double error) integralInfinite1 = IntegrateInfinite(x => Exp(-x), 0, double.PositiveInfinity);
+        (double result, double error) integralInfinite2 = IntegrateInfinite(x => Exp(-x * x), -double.PositiveInfinity, double.PositiveInfinity);
+        (double result, double error) integralInfinite3 = IntegrateInfinite(x => Exp(-x * x), 0, double.PositiveInfinity);
+        (double result, double error) integralInfinite4 = IntegrateInfinite(x => x * x * Exp(-x), 0, double.PositiveInfinity);
+
+        Console.WriteLine("∫_0^inf dx e^(-x) = 1:");
+        Console.WriteLine($"Result: {integralInfinite1.result}, Error: {integralInfinite1.error}");
+
+        Console.WriteLine("∫_inf^inf dx e^(-x²) = √π:");
+        Console.WriteLine($"Result: {integralInfinite2.result}, Error: {integralInfinite2.error}");
+
+        Console.WriteLine("∫₀^∞ dx x * e^(-x²) = 1/2:");
+        Console.WriteLine($"Result: {integralInfinite3.result}, Error: {integralInfinite3.error}");
+
+        Console.WriteLine("∫₀^∞ dx x² * e^(-x) = 2:");
+        Console.WriteLine($"Result: {integralInfinite4.result}, Error: {integralInfinite4.error}");
+
+
+
     }
 
-     
 }
 
