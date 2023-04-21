@@ -10,4 +10,5 @@ set grid
 plot 'errors.data' using 1:2 with linespoints title 'Estimated Error using plain MC', \
      'errors.data' using 1:3 with linespoints title 'Actual Error', \
      'errors.data' using 1:4 with linespoints title 'Estimated Error using Quasi-random', \
+     'errors.data' using 1:5 with linespoints title 'Estimated Error using Stratified Sampling', \
      1/sqrt(x) title '1/sqrt(N)' with lines

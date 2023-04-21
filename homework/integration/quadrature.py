@@ -1,6 +1,8 @@
 import numpy as np
 from scipy.integrate import quad
 
+x = np.linspace(0, 1, 1000)
+
 def integrand_sqrt(x):
     return np.sqrt(x)
 
@@ -12,10 +14,6 @@ def ln_sqrt(x):
 
 def pi_approx(x):
     return 4 * np.sqrt(1-x**2)
-
-x = np.linspace(0, 1, 1000)
-x1 = np.linspace(0.00001, 1, 1000)
-
 
 def exponential_neg_x(x):
     return np.exp(-x)
@@ -44,8 +42,8 @@ print("∫01 dx 4√(1-x²) = ", integral_pi_approx, "Error:", error_pi_approx)
 
 
 print(40 * "-", "python infinite  using scipy", 40 * "-")
-print("∫₀^∞ dx e^(-x) = ", integral_exp_neg_x, "Error:", error_exp_neg_x)
-print("∫₀^∞ dx x * e^(-x²) = ", integral_x_times_exp_neg_x_squared, "Error:", error_x_times_exp_neg_x_squared)
+print("∫0∞ dx e^(-x) = ", integral_exp_neg_x, "Error:", error_exp_neg_x)
+print("∫0∞ dx x * e^(-x²) = ", integral_x_times_exp_neg_x_squared, "Error:", error_x_times_exp_neg_x_squared)
 print("∫-∞^∞ dx e^(-x²/2) / √(2 * π) = ", integral_normal_distribution, "Error:", error_normal_distribution)
 
 

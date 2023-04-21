@@ -1,25 +1,23 @@
 ∫01 dx √(x) = 2/3:
-Result: 0.666953909054655, within accuracy: True
+Result: 0.666680932893738, within accuracy: True
 ∫01 dx 1/√(x) = 2:
-Result: 1.99996150007805, within accuracy: True
+Result: 1.99999738796403, within accuracy: True
 ∫01 dx 4√(1-x²) = π:
-Result: 3.14183457802727, within accuracy: True
+Result: 3.14159750770263, within accuracy: True
 ∫01 dx ln(x)/√(x) = -4:
-Result: -3.99991705899915, within accuracy: True
-Error function for z = 0.5:
-0.520450833623745
+Result: -3.99999834899021, within accuracy: True
 ∫01 dx 1/√(x) using Clenshaw-Curtis transformation:
-1.99999201046432
+1.9999998903107
 ∫01 dx ln(x)/√(x) using Clenshaw-Curtis transformation:
--3.99987385646141
-∫_0^inf dx e^(-x) = 1:
-Result: 1.00054304003965, Error: 0.00199911181347885
-∫_inf^inf dx e^(-x²) = √π:
-Result: 1.77269010023488, Error: 0.00194967017054797
-∫₀^∞ dx x * e^(-x²) = 1/2:
-Result: 0.88621864482796, Error: 0.00118574819445882
-∫₀^∞ dx x² * e^(-x) = 2:
-Result: 2.00036340120706, Error: 0.00204284222093371
+-3.99999813339603
+∫0inf dx e^(-x) = 1:
+Result: 1.00000733953412, Error: 0.000233942509522603
+∫infinf dx e^(-x²) = √π:
+Result: 1.77269051667853, Error: 0.000275897584715248
+∫0inf dx x * e^(-x²) = 1/2:
+Result: 0.499943618087949, Error: 0.00024244042351716
+∫0inf dx x² * e^(-x) = 2:
+Result: 1.99995422257701, Error: 0.000379955830227461
 ---------------------------------------- python finite integrals using scipy ----------------------------------------
 ∫01 dx √(x) =  0.6666666666666669 Error: 7.401486830834379e-16
 ∫01 dx 1/√(x) =  1.9999999999999984 Error: 5.773159728050814e-15

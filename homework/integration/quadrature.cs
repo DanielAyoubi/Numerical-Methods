@@ -4,7 +4,7 @@ using static System.Math;
 public class adaptiveintegrator
 {
     public static double Integrate(
-        Func<double, double> f, double a, double b, double delta = 0.001, double epsilon = 0.001, double f2 = double.NaN, double f3 = double.NaN) 
+        Func<double, double> f, double a, double b, double acc = 0.0001, double eps = 0.0001, double f2 = double.NaN, double f3 = double.NaN) 
         {
         double h = b - a;
         if (double.IsNaN(f2)) {
@@ -16,20 +16,20 @@ public class adaptiveintegrator
         double Q = (2 * f1 + f2 + f3 + 2 * f4) / 6 * (b - a);
         double q = (f1 + f2 + f3 + f4) / 4 * (b - a);
         double err = Abs(Q - q);
-        if (err <= delta + epsilon * Abs(Q)) {
+        if (err <= acc + eps * Abs(Q)) {
             return Q;
         }
         else {
-            return Integrate(f, a, (a + b) / 2, delta / Sqrt(2), epsilon, f1, f2) +
-                   Integrate(f, (a + b) / 2, b, delta / Sqrt(2), epsilon, f3, f4);
+            return Integrate(f, a, (a + b) / 2, acc / Sqrt(2), eps, f1, f2) +
+                   Integrate(f, (a + b) / 2, b, acc / Sqrt(2), eps, f3, f4);
         }
     }
 
     public static double Integrate_CC(
-        Func<double, double> f, double a, double b, double delta = 0.001, double epsilon = 0.001, double f2 = double.NaN, double f3 = double.NaN)
+        Func<double, double> f, double a, double b, double acc = 0.0001, double eps = 0.0001, double f2 = double.NaN, double f3 = double.NaN)
     {
         Func<double, double> transformedF = theta => f((a + b) / 2 + (b - a) / 2 * Cos(theta)) * Sin(theta) * (b - a) / 2;
-        return Integrate(transformedF, 0, PI, delta, epsilon, f2, f3);
+        return Integrate(transformedF, 0, PI, acc, eps, f2, f3);
     }
 
     public static double Erf(double z)
@@ -51,7 +51,7 @@ public class adaptiveintegrator
     }
 
     public static (double, double) Integrate_err(
-    Func<double, double> f, double a, double b, double delta = 0.001, double epsilon = 0.001, double f2 = double.NaN, double f3 = double.NaN)
+    Func<double, double> f, double a, double b, double acc = 0.0001, double eps = 0.0001, double f2 = double.NaN, double f3 = double.NaN)
     {
         double h = b - a;
         if (double.IsNaN(f2))
@@ -64,42 +64,38 @@ public class adaptiveintegrator
         double Q = (2 * f1 + f2 + f3 + 2 * f4) / 6 * (b - a);
         double q = (f1 + f2 + f3 + f4) / 4 * (b - a);
         double err = Abs(Q - q);
-        if (err <= delta + epsilon * Abs(Q))
+        double tolerance = acc + eps * Abs(Q);
+        if (err < tolerance) 
         {
             return (Q, err);
         }
-        else
+        else 
         {
-            var (leftResult, leftErr) = Integrate_err(f, a, (a + b) / 2, delta / Sqrt(2), epsilon, f1, f2);
-            var (rightResult, rightErr) = Integrate_err(f, (a + b) / 2, b, delta / Sqrt(2), epsilon, f3, f4);
-            return (leftResult + rightResult, leftErr + rightErr);
+            var (Q1, err1) = Integrate_err(f, a, (a + b) / 2, acc / Sqrt(2), eps, f1, f2);
+            var (Q2, err2) = Integrate_err(f, (a + b) / 2, b, acc / Sqrt(2), eps, f3, f4);
+            return (Q1 + Q2, err1 + err2);
         }
     }
 
-
-    public static (double, double) IntegrateInfinite(Func<double, double> f, double a, double b, double delta = 0.001, double epsilon = 0.001)
-    {
+    public static (double, double) IntegrateInfinite(Func<double, double> f, double a, double b, double acc = 0.0001, double eps = 0.0001) {
         if (double.IsNegativeInfinity(a) && double.IsPositiveInfinity(b))
         {
-            // Transformation for both limits being infinite
             Func<double, double> g = t => f(t / (1 - t * t)) * (1 + t * t) / ((1 - t * t) * (1 - t * t));
-            return Integrate_err(g, -1, 1, delta, epsilon);
+            return Integrate_err(g, -1, 1, acc, eps);
         }
         else if (double.IsNegativeInfinity(a))
         {
-            // Transformation for lower limit being infinite, upper limit being finite
-            Func<double, double> g = t => f(b - t / (1 + t)) / ((1 + t) * (1 + t));
-            return Integrate_err(g, -1, 0, delta, epsilon);
+            Func<double, double> g = t => f(b - t / (1 + t)) * 1 / ((1 + t) * (1 + t));
+            return Integrate_err(g, -1, 0, acc, eps);
         }
         else if (double.IsPositiveInfinity(b))
         {
-            // Transformation for lower limit being finite, upper limit being infinite
-            Func<double, double> g = t => f(a + t / (1 - t)) / ((1 - t) * (1 - t));
-            return Integrate_err(g, 0, 1, delta, epsilon);
+            Func<double, double> g = t => f(a + t / (1 - t)) * 1 / ((1 - t) * (1 - t));
+            return Integrate_err(g, 0, 1, acc, eps);
         }
         else
         {
-            return Integrate_err(f, a, b, delta, epsilon);
+            return Integrate_err(f, a, b, acc, eps);
         }
     }
 

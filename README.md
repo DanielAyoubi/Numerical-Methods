@@ -16,6 +16,8 @@ Repository for course in practical programming and numerical methods
 ---------------------------------------
 | 6  | Integration   | 6 | 3 | 1 | 10  |
 ---------------------------------------
+| 7  | Monte Carlo   | 6 | 3 | 1 | 10  |
+---------------------------------------
 |              ...                     |
  ======================================
 |                    total points: -  |

@@ -8,10 +8,13 @@ Out.txt: main.exe
 errors.svg : error.gpi errors.data
 	gnuplot $<
 
-main.exe: main.cs matrix.dll MC.dll QR.dll
+main.exe: main.cs matrix.dll MC.dll QR.dll SS.dll
 	mcs main.cs $(addprefix -reference:,$(filter %.dll,$^))
 
-MC.dll: monte_carlo.cs matrix.dll QR.dll
+SS.dll : stratified.cs matrix.dll QR.dll
+	mcs $< $(addprefix -reference:,$(filter %.dll,$^)) -target:library -out:SS.dll
+
+MC.dll: monte_carlo.cs 
 	mcs $< $(addprefix -reference:,$(filter %.dll,$^)) -target:library -out:MC.dll
 
 QR.dll : quasi_random.cs

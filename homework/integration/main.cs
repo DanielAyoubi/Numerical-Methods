@@ -24,10 +24,7 @@ class main{
         Console.WriteLine($"Result: {integral3}, within accuracy: {Abs(integral3 - PI) <= delta + epsilon * Abs(integral3)}");
 
         Console.WriteLine("∫01 dx ln(x)/√(x) = -4:");
-        Console.WriteLine($"Result: {integral4}, within accuracy: {Abs(integral4 + 4.0) <= delta + epsilon * Abs(integral4)}");
-
-		Console.WriteLine("Error function for z = 0.5:");
-        Console.WriteLine(Erf(0.5));	
+        Console.WriteLine($"Result: {integral4}, within accuracy: {Abs(integral4 + 4.0) <= delta + epsilon * Abs(integral4)}");	
 
 		using( var s = new System.IO.StreamWriter("erf.data")) {
 		for (double i = -3; i <= 3; i += 0.01)
@@ -46,19 +43,19 @@ class main{
 
         (double result, double error) integralInfinite1 = IntegrateInfinite(x => Exp(-x), 0, double.PositiveInfinity);
         (double result, double error) integralInfinite2 = IntegrateInfinite(x => Exp(-x * x), -double.PositiveInfinity, double.PositiveInfinity);
-        (double result, double error) integralInfinite3 = IntegrateInfinite(x => Exp(-x * x), 0, double.PositiveInfinity);
+        (double result, double error) integralInfinite3 = IntegrateInfinite(x => x * Exp(-x * x), 0, double.PositiveInfinity);
         (double result, double error) integralInfinite4 = IntegrateInfinite(x => x * x * Exp(-x), 0, double.PositiveInfinity);
 
-        Console.WriteLine("∫_0^inf dx e^(-x) = 1:");
+        Console.WriteLine("∫0inf dx e^(-x) = 1:");
         Console.WriteLine($"Result: {integralInfinite1.result}, Error: {integralInfinite1.error}");
 
-        Console.WriteLine("∫_inf^inf dx e^(-x²) = √π:");
+        Console.WriteLine("∫infinf dx e^(-x²) = √π:");
         Console.WriteLine($"Result: {integralInfinite2.result}, Error: {integralInfinite2.error}");
 
-        Console.WriteLine("∫₀^∞ dx x * e^(-x²) = 1/2:");
+        Console.WriteLine("∫0inf dx x * e^(-x²) = 1/2:");
         Console.WriteLine($"Result: {integralInfinite3.result}, Error: {integralInfinite3.error}");
 
-        Console.WriteLine("∫₀^∞ dx x² * e^(-x) = 2:");
+        Console.WriteLine("∫0inf dx x² * e^(-x) = 2:");
         Console.WriteLine($"Result: {integralInfinite4.result}, Error: {integralInfinite4.error}");
 
 
