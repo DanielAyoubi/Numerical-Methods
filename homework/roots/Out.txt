@@ -1,0 +1,6 @@
+Expected roots: (±1,1)
+Extremums of Rosenbrock's valley found at: (0.999935169425151, 0.999851522042058)
+Expected roots for polynomial f(x) = x³-6x²+11x-6 -> (1, 2, 3)
+Root 1: 0.999558186600554
+Root 2: 1.99793815331309
+Root 3: 3.00167072119392
