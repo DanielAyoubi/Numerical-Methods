@@ -3,7 +3,7 @@ DIR=../matlib
 Out.txt: main.exe
 	mono main.exe > Out.txt
 
-main.exe: main.cs NM.dll ODE.dll
+main.exe: main.cs NM.dll ODE.dll genlist.cs
 	mcs main.cs $(addprefix -reference:,$(filter %.dll,$^))
 
 
