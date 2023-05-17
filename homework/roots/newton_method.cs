@@ -2,7 +2,7 @@ using System;
 using static System.Math;
 
 public static class NewtonMethod {
-    public static vector newton(Func<vector, vector> f, vector x, double eps = 1e-2) {
+    public static vector newton(Func<vector, vector> f, vector x, double eps = 1e-6) {
         int n = x.size;
         double lambda = 1.0;
         vector fx = new vector(n);
@@ -27,7 +27,7 @@ public static class NewtonMethod {
             if (deltax.norm() < Pow(2, -26)) break;
 
             lambda = 1.0;
-            while (f(x + lambda * deltax).norm() > (1 - lambda / 2) * fx.norm() && lambda >= 1.0 / 1024) {
+            while (f(x + lambda * deltax).norm() > (1.0 - lambda / 2.0) * fx.norm() && lambda >= Pow(2, -26)) {
                 lambda /= 2;
             }
 

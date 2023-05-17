@@ -1,0 +1,10 @@
+set terminal svg background "white"
+set output "Higgs.svg"
+set title "Higgs"
+set xlabel 'Energy [GeV]'
+set ylabel 'Signal'
+
+
+plot 'higgs.data.txt' using 1:2:3 with errorbars title 'Experimental data',\
+    'fitted.data' index 0 using 1:2 with lines title 'Fit'
+

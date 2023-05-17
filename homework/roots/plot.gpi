@@ -1,0 +1,49 @@
+set terminal svg background "white"
+set output "hydrogen.svg"
+set title 'Bound state hydrogen atom'
+set xlabel 'Bohr radius'
+set ylabel ''
+
+set key outside
+set grid
+
+plot "hydrogen.data" using 1:2 with points pointtype 2 pointsize 1 title "Numerical",\
+    x*exp(-x) with lines linetype 2 linecolor "red" linewidth 2 title "Analytical solution"
+
+set output "convergence_rmin.svg"
+set title "Hydrogen Atom - Energy Convergence wrt rmin"
+set xlabel "rmin"
+set ylabel "Energy (Hartree)"
+
+plot 'convergence.data' index 0 with linespoints title "rmin",\
+    -0.5 with lines linetype 2 linecolor "red" linewidth 1
+
+set output "convergence_rmax.svg"
+set title "Hydrogen Atom - Energy Convergence wrt rmax"
+set xlabel "rmax"
+set ylabel "Energy (Hartree)"
+set yrange [-0.1:-0.505]
+
+plot 'convergence.data' index 1 with linespoints title "rmax",\
+    -0.5 with lines linetype 2 linecolor "red" linewidth 1
+
+set output "convergence_acc.svg"
+set title "Hydrogen Atom - Energy Convergence wrt accuracy"
+set xlabel "accuracy"
+set ylabel "Energy (Hartree)"
+set yrange [-0.49: -0.505]
+set xrange [1e-3 : 0.1]
+set format x "%0.2f"
+
+plot 'convergence.data' index 2 with linespoints title "accuracy",\
+    -0.5 with lines linetype 2 linecolor "red" linewidth 1
+
+set output "convergence_eps.svg"
+set title "Hydrogen Atom - Energy Convergence wrt epsilon"
+set xlabel "epsilon"
+set ylabel "Energy (Hartree)"
+set yrange [-0.39: -0.505]
+set xrange [1e-3 : 0.1]
+
+plot 'convergence.data' index 3 with linespoints title "epsilon",\
+    -0.5 with lines linetype 2 linecolor "red" linewidth 1

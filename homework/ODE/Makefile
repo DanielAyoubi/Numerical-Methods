@@ -14,7 +14,7 @@ lotka_volterra.svg : lotka_volterra.gpi lotka_volterra.data
 main.exe: main.cs ODE.dll
 	mcs main.cs -reference:ODE.dll
 
-ODE.dll: $(DIR)/vector.cs $(DIR)/matrix.cs RK45.cs genlist.cs
+ODE.dll: $(DIR)/vector.cs $(DIR)/matrix.cs RK45.cs $(DIR)/genlist.cs
 	mcs $^ -target:library -out:ODE.dll
 
 clean:

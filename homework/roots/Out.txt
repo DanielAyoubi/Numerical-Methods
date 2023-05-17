@@ -1,6 +1,8 @@
-Expected roots: (±1,1)
-Extremums of Rosenbrock's valley found at: (0.999935169425151, 0.999851522042058)
+Expected roots: (1,1)
+Extremums of Rosenbrock's valley found at: (0.999999999998346, 0.999999999996636)
 Expected roots for polynomial f(x) = x³-6x²+11x-6 -> (1, 2, 3)
-Root 1: 0.999558186600554
-Root 2: 1.99793815331309
-Root 3: 3.00167072119392
+Root 1: 0.999999707499839
+Root 2: 2.00000001755878
+Root 3: 3.00000000002644
+Lowest root (energy): E0 = -0.492176217279732 hartree. Should be equal to -0.5 hartree
+Plots are made with starting guess of E = -0.8 hartree

@@ -1,0 +1,5 @@
+Minimum of the Rosenbrocks's valley function with initial (x,y) = (-1.2, 1.1) is found at x = 0.999999537930977, y = 0.999999075125177 1810 steps taken to minimum
+---------------------------------------------------------------------------------------------------------
+Minimum of the Himmelblau's function with initial (x,y) = (-0.5, 1.5) is found at x = -2.80511807653484, y = 3.13131251250001 108 steps taken to minimum
+---------------------------------------------------------------------------------------------------------
+Mass of Higgs boson converged to 125.972187875583 GeV/c², the experimental width to 2.08631679231671 and the scale-factor to 9.87614675498127 in 7412 steps.
