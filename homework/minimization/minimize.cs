@@ -75,4 +75,80 @@ public static class minimize {
         }
         return sum;
     }
+
+    public static (vector, int) downhill_simplex(Func<vector, double> f, matrix simplex, double acc=1e-6) {
+        int n = simplex.size2;
+        int maxsteps = 50000;
+        int steps = 0;
+        matrix p = simplex.copy();
+        vector fx = new vector(n+1);
+
+        for (int i = 0; i <= n; i++) {
+            fx[i] = f(p[i]);
+        }
+
+        while (true) { 
+            int highest = 0;
+            int lowest = 0;
+            for (int i = 0; i <= n; i++) {
+                if (fx[i] < fx[lowest]) lowest = i;
+                if (fx[i] > fx[highest]) highest = i;
+            }
+
+            vector centroid = new vector(n);
+            for (int i = 0; i <= n; i++) {
+                if (i != highest) centroid += p[i];
+            }
+            centroid /= n;
+
+            vector reflected = centroid + (centroid - p[highest]);
+            double f_reflected = f(reflected);
+            if (f_reflected < fx[lowest]) {
+                vector expanded = centroid + 2 * (reflected - centroid);
+                double f_expanded = f(expanded);
+
+                if (f_expanded < f_reflected) {
+                    p[highest] = expanded;
+                    fx[highest] = f_expanded;
+                } else {
+                    p[highest] = reflected;
+                    fx[highest] = f_reflected;
+                }
+            } else {
+                if (f_reflected < fx[highest]) {
+                    p[highest] = reflected;
+                    fx[highest] = f_reflected;
+                } else {
+                    vector contracted = centroid + 0.5 * (p[highest] - centroid);
+                    double f_contracted = f(contracted);
+
+                    if (f_contracted < fx[highest]) {
+                        p[highest] = contracted;
+                        fx[highest] = f_contracted;
+                    } else {
+                        for (int i = 0; i <= n; i++) {
+                            if (i != lowest) {
+                                p[i] = 0.5 * (p[i] + p[lowest]);
+                                fx[i] = f(p[i]);
+                            }
+                        }
+                    }
+                }
+            }
+
+            steps++;
+            if ((p[0] - p[highest]).norm() < acc || steps > maxsteps) {
+                break;
+            }
+        }
+
+        int min_index = 0;
+        for (int i = 1; i <= n; i++) {
+            if (fx[i] < fx[min_index]) min_index = i;
+        }
+
+        return (p[min_index], steps);
+    }
 }
+
+

@@ -50,5 +50,14 @@ class program{
         }
 
 
+       // matrix simplex = new matrix(3, 3); 
+       // simplex[0] = start;
+       // simplex[1] = start + new vector(10, 0, 0);
+       // simplex[2] = start + new vector(0, 10, 0);
+       // simplex[3] = start + new vector(0, 0, 10);
+       // var (min_simplex, steps_simplex) = downhill_simplex(D, simplex);
+       // Console.WriteLine($"Mass of Higgs boson converged to {min_simplex[0]} GeV/c², the experimental width to {min_simplex[1]} and the scale-factor to {min_simplex[2]} in {steps_simplex} steps.");
+
+
     } // Main
 } // program
