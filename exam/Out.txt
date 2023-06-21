@@ -1,0 +1,21 @@
+The rank-1 update on a symmetric eigenvalue problem is tested here for the first case of σ = 0
+Following random diagonal matrix D is generated:
+     0.618          0          0          0          0 
+         0       0.45          0          0          0 
+         0          0      0.369          0          0 
+         0          0          0       0.26          0 
+         0          0          0          0       0.11 
+And the computed Eigenvalues for A is found to be:
+Eigenvalue 1: 0.617813208428124
+Eigenvalue 2: 0.449811546341428
+Eigenvalue 3: 0.369076476138586
+Eigenvalue 4: 0.260489464858775
+Eigenvalue 5: 0.11034898139087
+
+Retrying computation for size 27
+Retrying computation for size 61
+Retrying computation for size 61
+Retrying computation for size 67
+Retrying computation for size 73
+Retrying computation for size 93
+Retrying computation for size 94

@@ -1,7 +1,12 @@
 DIR=../matlib
 
+all : Out.txt plot.gpi NNplot.svg
+
 Out.txt: main.exe
 	mono $< > $@
+
+NNplot.svg : plot.gpi
+	gnuplot $<
 
 main.exe: main.cs matlib.dll NN.dll 
 	mcs main.cs $(addprefix -reference:,$(filter %.dll,$^))

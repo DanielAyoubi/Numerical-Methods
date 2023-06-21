@@ -5,7 +5,7 @@ public static class minimize {
     public static (vector, int) qnewton(
         Func<vector,double> f, /* objective function */
         vector start, /* starting point */
-        double acc=1e-6 /* accuracy goal, on exit |gradient| should be < acc */
+        double acc=1e-2 /* accuracy goal, on exit |gradient| should be < acc */
     ) {
         vector x = start.copy();
         int n = x.size;
@@ -17,7 +17,7 @@ public static class minimize {
         while (grad.norm() > acc) {
             vector d = -B * grad;  
             double lambda  = 1.0;
-            double lambda_min = Pow(2, -26);
+            double lambda_min = Pow(2, -15);
 
             while (true) { 
                 if (f(x + lambda * d) < f(x)) {
