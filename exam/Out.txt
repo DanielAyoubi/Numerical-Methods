@@ -1,21 +1,48 @@
+------------------------------------------------------------------------------------------------------------------
 The rank-1 update on a symmetric eigenvalue problem is tested here for the first case of σ = 0
 Following random diagonal matrix D is generated:
-     0.618          0          0          0          0 
-         0       0.45          0          0          0 
-         0          0      0.369          0          0 
-         0          0          0       0.26          0 
-         0          0          0          0       0.11 
+     0.895          0          0          0          0 
+         0     0.0357          0          0          0 
+         0          0      0.791          0          0 
+         0          0          0     0.0933          0 
+         0          0          0          0      0.556 
 And the computed Eigenvalues for A is found to be:
-Eigenvalue 1: 0.617813208428124
-Eigenvalue 2: 0.449811546341428
-Eigenvalue 3: 0.369076476138586
-Eigenvalue 4: 0.260489464858775
-Eigenvalue 5: 0.11034898139087
-
-Retrying computation for size 27
-Retrying computation for size 61
-Retrying computation for size 61
-Retrying computation for size 67
-Retrying computation for size 73
-Retrying computation for size 93
-Retrying computation for size 94
+Eigenvalue 1: 0.895219148087883
+Eigenvalue 2: 0.035660951414919
+Eigenvalue 3: 0.791017700355043
+Eigenvalue 4: 0.0933105037982159
+Eigenvalue 5: 0.555781234780225
+------------------------------------------------------------------------------------------------------------------
+To show the algorithm also works for the case σ > 0
+Another random diagonal matrix D is generated:
+     0.911          0          0          0          0 
+         0       0.16          0          0          0 
+         0          0      0.241          0          0 
+         0          0          0      0.216          0 
+         0          0          0          0      0.856 
+And the computed Eigenvalues for A is found to be:
+Eigenvalue 1: 0.661963889453623
+Eigenvalue 2: 0.165549247143598
+Eigenvalue 3: 0.231120948873058
+Eigenvalue 4: 0.661963889453623
+Eigenvalue 5: 2.76781481503511
+------------------------------------------------------------------------------------------------------------------
+An lastly for the case of σ < 0
+Random diagonal matrix D is generated:
+    0.0868          0          0          0          0 
+         0        0.4          0          0          0 
+         0          0      0.192          0          0 
+         0          0          0      0.752          0 
+         0          0          0          0      0.251 
+And the computed Eigenvalues for A is found to be:
+Eigenvalue 1: -1.53489268380787
+Eigenvalue 2: 0.207934983701482
+Eigenvalue 3: 0.351836940996041
+Eigenvalue 4: 0.716181293744447
+Eigenvalue 5: 0.716181293393253
+------------------------------------------------------------------------------------------------------------------
+To test for the O(n2) operations the algorithm is run on random generated matrices from n=1 to n=50 and the time measured for completion is noted
+The performance is shown in the figure computation_time.svg
+------------------------------------------------------------------------------------------------------------------
+Retrying computation for 44x44 matrix
+Retrying computation for 46x46 matrix

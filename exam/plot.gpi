@@ -1,23 +1,17 @@
 set terminal svg size 1200,800 enhanced background rgb "white"
 set output "computation_time.svg"
-set title 'Computation Time vs Matrix Size'
-set xlabel 'Size of Matrix nxn'
+set title 'Computation time vs Matrix of size NxN'
+set xlabel 'N'
 set ylabel 'Computational Time [ms]'
 
 set key outside
 set tics out
 set grid
-set xrange [0:100]
 
-set style line 1 lc rgb '#0060ad' lt 1 lw 2 pt 7 ps 1.5   # blue
-set style line 2 lc rgb '#dd181f' lt 1 lw 2                # red
-
-# Define a fit function of the form f(x) = a + b*x**2
 f(x) = a + b*x**2
-# Initial guess.
 a = 0.001
 b = 1
 
 fit f(x) "computation_times.data" using 1:2 via a, b
-plot "computation_times.data" using 1:2 with linespoints title 'Computation Time', \
+plot "times.data" using 1:2 with linespoints title 'Computation Time', \
      f(x) title 'Fit: O(n^2)' with lines linestyle 2

@@ -2,7 +2,7 @@ using System;
 using static System.Math;
 
 public static class NewtonMethod {
-    public static vector newton(Func<vector, vector> f, vector x, double eps = 1e-3, int maxIterations = 1000) {
+    public static vector newton(Func<vector, vector> f, vector x, double eps = 1e-3, int maxIterations = 100) {
         int n = x.size;
         double lambda = 1.0;
         vector fx = new vector(n);

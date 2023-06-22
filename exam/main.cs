@@ -46,6 +46,7 @@ public static class MainClass {
         vector eigenvalues0 = program.RankOneUpdate(D, u, sigma0);
         vector eigenvaluesPos = program.RankOneUpdate(D1, u1, sigmaPos);
         vector eigenvaluesNeg = program.RankOneUpdate(D2, u2, sigmaNeg);
+        Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
         Console.WriteLine("The rank-1 update on a symmetric eigenvalue problem is tested here for the first case of σ = 0");
         Console.Write("Following random diagonal matrix D is generated:");
         D.print();
@@ -53,44 +54,48 @@ public static class MainClass {
         for (int i = 0; i < eigenvalues0.size; i++) {
             Console.WriteLine($"Eigenvalue {i+1}: {eigenvalues0[i]}");
         }
-        Console.WriteLine("");
+        Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
         
+        Console.WriteLine("To show the algorithm also works for the case σ > 0");
+        Console.Write("Another random diagonal matrix D is generated:");
+        D1.print();
+        Console.WriteLine("And the computed Eigenvalues for A is found to be:");
+        for (int i = 0; i < eigenvaluesPos.size; i++) {
+            Console.WriteLine($"Eigenvalue {i+1}: {eigenvaluesPos[i]}");
+        }
+        Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
 
-        // Console.WriteLine("To show the algorithm also works for the case σ > 0");
-        // Console.Write("Another random diagonal matrix D is generated:");
-        // D1.print();
-        // Console.WriteLine("And the computed Eigenvalues for A is found to be:");
-        // for (int i = 0; i < eigenvaluesPos.size; i++) {
-        //     Console.WriteLine($"Eigenvalue {i+1}: {eigenvaluesPos[i]}");
-        // }
-        // Console.WriteLine("");
-
-        // Console.WriteLine("An lastly for the case of σ < 0");
-        // Console.Write("Random diagonal matrix D is generated:");
-        // D2.print();
-        // Console.WriteLine("And the computed Eigenvalues for A is found to be:");
-        // for (int i = 0; i < eigenvaluesNeg.size; i++) {
-        //     Console.WriteLine($"Eigenvalue {i+1}: {eigenvaluesNeg[i]}");
-        // }
-
-        // Console.WriteLine("To test for the O(n2) operations the algorithm is run on random generated matrices from n=1 to n=500 and the time measured for completion is noted");
-        // Console.WriteLine("The performance is shown in the figure computation_time.svg");
+        Console.WriteLine("An lastly for the case of σ < 0");
+        Console.Write("Random diagonal matrix D is generated:");
+        D2.print();
+        Console.WriteLine("And the computed Eigenvalues for A is found to be:");
+        for (int i = 0; i < eigenvaluesNeg.size; i++) {
+            Console.WriteLine($"Eigenvalue {i+1}: {eigenvaluesNeg[i]}");
+        }
+        Console.WriteLine("------------------------------------------------------------------------------------------------------------------");       
       
 
-        int maxRetries = 8;
-        using (var writer = new StreamWriter("computation_times.data")) {        
-            for (int i = 1; i <= 100; i++) {
+        int maxRetries = 5; // Adjust if fail to converge
+        int largestMatrix = 50; // Adjust if computation takes too long
+        Console.WriteLine($"To test for the O(n2) operations the algorithm is run on random generated matrices from n=1 to n={largestMatrix} and the time measured for completion is noted");
+        Console.WriteLine("The performance is shown in the figure computation_time.svg");
+        Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
+
+        using (var writer = new StreamWriter("times.data")) {        
+            for (int i = 1; i <= largestMatrix; i++) {
                 int retries = 0;
                 while (retries < maxRetries) { // Inner loop for retries
-                    Stopwatch stopwatch = Stopwatch.StartNew();
-                    double sigma = random.NextDouble() * 2 - 1;
+                    double sigma = 1; // Assuming σ = 1
                     matrix D0 = GenerateRandomMatrix(i, i);
                     vector u0 = GenerateRandomVector(i);
-                    vector eigenvalues = program.RankOneUpdate(D0, u0, sigma);
+
+                    Stopwatch stopwatch = Stopwatch.StartNew();                    
+                    program.RankOneUpdate(D0, u0, sigma);
                     stopwatch.Stop();
 
-                    if (stopwatch.ElapsedMilliseconds > 10 + i * i) {
-                        Console.WriteLine("Retrying computation for size " + i);
+                    double timelimit = 10 + 0.15*i*i;
+                    if (stopwatch.ElapsedMilliseconds > timelimit) {  // Incase the Newton method has taken too long to converge
+                        Console.WriteLine($"Retrying computation for {i}x{i} matrix");
                         retries++;
                         continue; // Restart the inner loop for the same size
                     }
@@ -99,12 +104,10 @@ public static class MainClass {
                     break; // Break the inner loop to proceed with the next size
                 }
                 if (retries == maxRetries) {
-                    Console.WriteLine("Max retries exceeded for size " + i);
+                    Console.WriteLine($"Max retries exceeded for {i}x{i} matrix");
+                    Console.WriteLine($"Try to adjust parameter maxRetries");
                 }
             }
         }
-
-
-
     }
 }
