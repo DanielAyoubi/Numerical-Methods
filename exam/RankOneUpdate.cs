@@ -57,7 +57,6 @@ public static class program {
 
         for (int i = 0; i < u.size; i++) {
             if (u[i] < eps && Abs(d[i] - lambda) < eps) continue;
-            if (sigma == 0) continue;
             else sum += sigma * u[i] * u[i] / (d[i] - lambda);
             
         }
