@@ -20,3 +20,6 @@ factorials.data : Makefile
 
 main: main.exe sfuns.dll
 	mkbundle -o $@ --simple $^
+
+clean : 
+	rm -f Out.txt *.dll *.exe *.svg

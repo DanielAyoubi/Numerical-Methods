@@ -1,5 +1,8 @@
-default : main.cs
-	mcs main.cs
+Out.txt : main.exe
 	mono main.exe > Out.txt
-	cat Out.txt
-	
+
+main.exe : main.cs
+	mcs main.cs -target:exe -out:main.exe 
+
+clean:
+	rm -f *.txt *.dll *.exe

@@ -33,6 +33,7 @@ public static class program {
         for (int i = 0; i < n; i++) {
             uTu += u[i]*u[i];
         }
+
         
         if (sigma > 0) {
             for (int i = 0; i < n-1; i++) {

@@ -38,7 +38,6 @@ class program{
 
         WriteLine($"sumA-1 = {sumA-1:e} should be {n*tiny:e}");
         WriteLine($"sumB-1 = {sumB-1:e} should be {n*tiny:e}");
-     // adding 1 to a very small number and adding a very small number to 1
    
         WriteLine(approx(1.0,1.0));
     }

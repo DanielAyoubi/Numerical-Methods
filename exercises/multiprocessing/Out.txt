@@ -1,16 +1,16 @@
 nterms=200000000 nthreads=1
 master thread: now waiting for othrer threads...
 harmonic sum = 19.6910435919144
-Harmonic sum_parallel = 13.7166198458037
+Harmonic sum_parallel = 13.0361936936509
 nterms=200000000 nthreads=2
 master thread: now waiting for othrer threads...
 harmonic sum = 19.6910435919123
-Harmonic sum_parallel = 13.8876040377397
+Harmonic sum_parallel = 12.3489610864979
 nterms=200000000 nthreads=3
 master thread: now waiting for othrer threads...
 harmonic sum = 19.691043581912
-Harmonic sum_parallel = 13.7423971517777
+Harmonic sum_parallel = 12.6976076328117
 nterms=200000000 nthreads=4
 master thread: now waiting for othrer threads...
 harmonic sum = 19.691043591913
-Harmonic sum_parallel = 13.7792305756361
+Harmonic sum_parallel = 12.1459409244463

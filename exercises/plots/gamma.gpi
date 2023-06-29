@@ -1,4 +1,4 @@
-set terminal svg
+set terminal svg background "white"
 set key bottom right
 set output "Gamma.svg"
 set xlabel "x"
@@ -9,7 +9,6 @@ set yzeroaxis
 set samples 800
 set title "Gamma function"
 plot [-5:5][-5:5] \
-"gamma.data" with lines linetype 1 title "theory" \
-,"factorials.data" using ($1+1):($2) with points pointtype 4 title "experiment" \
-plot the built-in gamma function as a line with linetype 2 and title "built-in gamma"
-,gamma(x) with lines linetype 2 title "built-in gamma"
+	"gamma.data" with lines linetype 1 title "theory" \
+	,"factorials.data" using ($1+1):($2) with points pointtype 4 title "experiment" \
+	,gamma(x) with lines linetype 2 title "built-in gamma"

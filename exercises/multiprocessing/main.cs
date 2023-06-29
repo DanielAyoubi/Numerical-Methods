@@ -29,7 +29,7 @@ class main{
    }
 
         Thread[] threads = new Thread[nthreads];
-        for(int i=0;i<nthreads;i++){,
+        for(int i=0;i<nthreads;i++){
             threads[i] = new Thread(harmonic); /* create a thread */
             threads[i].Start(x[i]);        /* run it with x[i] as argument to "harmonic" */
         }

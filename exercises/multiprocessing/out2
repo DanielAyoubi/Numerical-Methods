@@ -1,3 +1,4 @@
 nterms=200000000 nthreads=1
 master thread: now waiting for othrer threads...
-19.6910435919144
+harmonic sum = 19.6910435919144
+Harmonic sum_parallel = 12.5634190700537

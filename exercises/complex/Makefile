@@ -9,3 +9,6 @@ main.exe : main.cs cmath.dll
 
 cmath.dll :$(DIR)cmath.cs $(DIR)complex.cs
 	mcs -target:library -out:./cmath.dll $^
+
+clean : 
+	rm -f *.data *.txt *.dll *.exe

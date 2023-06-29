@@ -9,3 +9,6 @@ sfuns.dll : sfuns.cs
 
 print : main.exe
 	@cat Out.txt
+
+clean :
+	rm -f Out.txt *.exe *.dll

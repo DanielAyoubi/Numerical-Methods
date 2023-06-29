@@ -16,3 +16,6 @@ out1: main.exe ; mono main.exe -terms:$N -threads:1 > $@
 out2: main.exe ; mono main.exe -terms:$N -threads:1 > $@
 out3: main.exe ; mono main.exe -terms:$N -threads:1 > $@
 out4: main.exe ; mono main.exe -terms:$N -threads:1 > $@
+
+clean : 
+	rm -f Out.txt out* *.exe
